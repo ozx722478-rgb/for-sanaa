@@ -627,10 +627,8 @@
 </head>
 <body>
 
-    <!-- Hidden Audio/Video Player for Background Song -->
-    <video id="bg-music" loop playsinline preload="auto" style="display:none;">
-        <source src="video_1.mp4" type="video/mp4">
-    </video>
+    <!-- Audio Player for Background Song (MP3) -->
+    <audio id="bg-music" src="song.mp3" loop preload="auto"></audio>
 
     <div id="hearts-container"></div>
     <canvas id="fx-canvas"></canvas>
@@ -691,7 +689,7 @@
             <div class="signature" id="signature-text">حبيبك اللي يعشقك للأبد ❤️</div>
         </section>
 
-        <!-- 3. Secret Confession Box (رسالة سرية مغطاة) -->
+        <!-- 3. Secret Confession Box -->
         <section class="glass-section">
             <h2 style="color: var(--gold); margin-bottom: 8px;">اعتراف سري بيني وبينك 🤫❤️</h2>
             <p style="color: #e0aaff; font-size: 0.95rem;">المسي الصندوق اللي تحت عشان ينكشف الكلام</p>
@@ -703,7 +701,7 @@
             </div>
         </section>
 
-        <!-- 4. Open When Envelopes (كبسولات المشاعر) -->
+        <!-- 4. Open When Envelopes -->
         <section class="glass-section">
             <h2 style="color: var(--gold); margin-bottom: 8px;">افتحي الظرف حسب حالتك يا روحي ✉️</h2>
             <p style="color: #e0aaff; font-size: 0.95rem;">اختاري الظرف اللي يمثل شعورك الحين واقرئي رسالتي إلك</p>
@@ -728,7 +726,7 @@
             <div class="env-message-box" id="env-display"></div>
         </section>
 
-        <!-- 5. Interactive Love Slider (مقياس الحب) -->
+        <!-- 5. Interactive Love Slider -->
         <section class="glass-section">
             <h2 style="color: #ffb3c1; margin-bottom: 8px;">قديش تتوقعين نسبة حبك بقلبي؟ 🌡️❤️</h2>
             <p style="color: #f8ad9d; font-size: 0.95rem;">اسحبي المؤشر لليمين وشوفي النتيجة</p>
@@ -741,7 +739,7 @@
             </div>
         </section>
 
-        <!-- 6. Flip Cards (6 Cards) -->
+        <!-- 6. Flip Cards -->
         <section class="glass-section">
             <h2 style="color: #ffb3c1;">ليش أعشقك يا سناء؟ (المسي البطاقات) 🌹</h2>
             <div class="cards-grid">
@@ -819,7 +817,7 @@
             </div>
         </section>
 
-        <!-- 7. Future Dreams Board (أمنياتنا ومستقبلنا سوا) -->
+        <!-- 7. Future Dreams Board -->
         <section class="glass-section">
             <h2 style="color: var(--gold); margin-bottom: 8px;">أمنياتي وأحلامي معك يا سوسو ✨</h2>
             <p style="color: #e0aaff; font-size: 0.95rem;">(اضغطي على كل أمنية عشان ننوّرها سوا وندعي إنها تتحقق)</p>
@@ -842,7 +840,7 @@
             </div>
         </section>
 
-        <!-- 8. Official Heart Certificate (شهادة ملكية قلب) -->
+        <!-- 8. Official Heart Certificate -->
         <section class="glass-section">
             <div class="certificate-card">
                 <div style="font-size: 2.5rem; margin-bottom: 8px;">📜👑</div>
@@ -921,8 +919,8 @@
                 <input type="date" id="cfg-date" value="2026-09-29">
             </div>
             <div class="form-group">
-                <label>ملف أو رابط الأغنية (MP4 / MP3):</label>
-                <input type="text" id="cfg-audio" value="video_1.mp4" dir="ltr">
+                <label>ملف أو رابط الأغنية (MP3):</label>
+                <input type="text" id="cfg-audio" value="song.mp3" dir="ltr">
             </div>
             <div class="form-group">
                 <label>نص الرسالة:</label>
@@ -941,7 +939,7 @@
             her: "سناء (سوسو)",
             me: "حبيبك اللي يعشقك للأبد",
             date: "2026-09-29",
-            audio: "video_1.mp4",
+            audio: "song.mp3",
             msg: "يا سناء، من يوم 29 سبتمبر وأنتِ أجمل شيء صار بحياتي. فديتك وفديت روحك الحلوة.. سهرت وتعبت على كل تفصيلة بهالموقع بس عشان أشوف ابتسامتك اللي بتاخد العقل يا سوسو. تؤبريني شو بحبك، والله لا يحرمني من وجودك معي طول العمر."
         };
 
