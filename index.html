@@ -1205,5 +1205,26 @@
             closeSettings();
         }
     </script>
+    <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const audio = document.querySelector('audio');
+    
+    // دالة لتشغيل الصوت عند أول لمسة أو ضغطة في أي مكان بالصفحة
+    function startAudio() {
+      if (audio && audio.paused) {
+        audio.play().then(() => {
+          // إزالة المستمع بعد أن يبدأ الصوت بنجاح
+          document.removeEventListener('click', startAudio);
+          document.removeEventListener('touchstart', startAudio);
+        }).catch(error => {
+          console.log("بانتظار تفاعل المستخدم لتشغيل الصوت:", error);
+        });
+      }
+    }
+
+    document.addEventListener('click', startAudio);
+    document.addEventListener('touchstart', startAudio);
+  });
+</script>
 </body>
 </html>
