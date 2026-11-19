@@ -628,39 +628,82 @@
 <body>
 
     <!-- Audio Player for Background Song (MP3) -->
-<audio id="myAudio" loop preload="auto" src="song.mp3"></audio>
-
-<button id="musicBtn" onclick="toggleMusic()" style="
+<button id="musicBtn" onclick="toggleRomanticMusic()" style="
   position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 999999;
-  background: #ff4d6d;
+  background: linear-gradient(135deg, #ff4d6d, #c9184a);
   color: white;
   border: none;
   border-radius: 50px;
   padding: 12px 22px;
   font-size: 16px;
   font-weight: bold;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 15px rgba(201, 24, 74, 0.4);
   cursor: pointer;
+  font-family: inherit;
 ">
-  🎵 تشغيل الأغنية
+  🎹 تشغيل الموسيقى الرومانسية
 </button>
 
 <script>
-  function toggleMusic() {
-    var audio = document.getElementById("myAudio");
-    var btn = document.getElementById("musicBtn");
-    if (audio.paused) {
-      audio.play().then(() => {
-        btn.innerHTML = "⏸️ إيقاف الأغنية";
-      }).catch((err) => {
-        alert("خطأ: " + err.message);
-      });
+  let audioCtx = null;
+  let isPlaying = false;
+  let melodyTimer = null;
+
+  // نوتات لحن بيانو رومانسي هادئ
+  const notes = [
+    { f: 261.63, d: 0.6 }, { f: 329.63, d: 0.6 }, { f: 392.00, d: 0.6 }, { f: 493.88, d: 1.2 },
+    { f: 440.00, d: 0.6 }, { f: 392.00, d: 0.6 }, { f: 329.63, d: 1.2 },
+    { f: 293.66, d: 0.6 }, { f: 349.23, d: 0.6 }, { f: 440.00, d: 0.6 }, { f: 523.25, d: 1.2 },
+    { f: 493.88, d: 0.6 }, { f: 440.00, d: 0.6 }, { f: 392.00, d: 1.4 }
+  ];
+  let step = 0;
+
+  function playNote(freq, duration) {
+    if (!audioCtx) return;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    osc.type = 'sine'; // صوت ناعم يشبه البيانو الحالم
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    
+    gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.18, audioCtx.currentTime + 0.08);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration + 0.4);
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration + 0.5);
+  }
+
+  function loopMelody() {
+    if (!isPlaying) return;
+    const current = notes[step];
+    playNote(current.f, current.d);
+    step = (step + 1) % notes.length;
+    melodyTimer = setTimeout(loopMelody, current.d * 1000);
+  }
+
+  function toggleRomanticMusic() {
+    const btn = document.getElementById("musicBtn");
+    if (!isPlaying) {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      isPlaying = true;
+      btn.innerHTML = "⏸️ إيقاف الموسيقى";
+      loopMelody();
     } else {
-      audio.pause();
-      btn.innerHTML = "🎵 تشغيل الأغنية";
+      isPlaying = false;
+      clearTimeout(melodyTimer);
+      btn.innerHTML = "🎹 تشغيل الموسيقى الرومانسية";
     }
   }
 </script>
